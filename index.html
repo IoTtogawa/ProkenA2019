@@ -1,0 +1,38 @@
+<script src="/webiopi.js"></script>
+<script>
+function init(){
+}
+function stop(){
+	webiopi().callMacro("stop");
+}
+function forward(){
+	webiopi().callMacro("forward");
+}
+function reverse(){
+	webiopi.callMacro("reverse");
+}
+fuction turnLeft(){
+	webiopi.callMacro("turnLeft");
+}
+function turnRight(){
+	webiopi.callMacro("turnRight");
+}
+webiopi().ready(init);
+</script>
+
+<script src="https://use.fontawesome.com/497e53239.js"></script>
+<p>
+	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
+	<i class="fa fa-arrow-circle-o-up fa-fw fa-5x" aria-hidden="true" onmousedown="forward()"></i>
+	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
+</p>
+<p>
+	<i class="fa fa-arrow-circle-o-left fa-fw fa-5x" aria-hidden="true" onmousedown="turnLeft()"></i>
+	<i class="fa fa-arrow-circle-o fa-fw fa-5x" aria-hidden="true"onmousedown="stop()"></i>
+	<i class="fa fa-arrow-circle-o-right fa-fw fa-5x" aria-hidden="true" onmousedown="turnRight()"></i>
+</p>
+<p>
+	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
+	<i class="fa fa-arrow-circle-o-down fa-fw fa-5x" aria-hidden="true" onmousedown="reverse()"></i>
+	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
+</p>
