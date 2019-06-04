@@ -1,38 +1,91 @@
-<script src="/webiopi.js"></script>
-<script>
-function init(){
-}
-function stop(){
-	webiopi().callMacro("stop");
-}
-function forward(){
-	webiopi().callMacro("forward");
-}
-function reverse(){
-	webiopi.callMacro("reverse");
-}
-fuction turnLeft(){
-	webiopi.callMacro("turnLeft");
-}
-function turnRight(){
-	webiopi.callMacro("turnRight");
-}
-webiopi().ready(init);
-</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>WebIOPi | Light Control</title>
+    <script type="text/javascript" src="/webiopi.js"></script>
+    <script type="text/javascript">
+    webiopi().ready(function() {
+        // Create a "Light" labeled button for GPIO 17
 
-<script src="https://use.fontawesome.com/497e53239.js"></script>
-<p>
-	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
-	<i class="fa fa-arrow-circle-o-up fa-fw fa-5x" aria-hidden="true" onmousedown="forward()"></i>
-	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
-</p>
-<p>
-	<i class="fa fa-arrow-circle-o-left fa-fw fa-5x" aria-hidden="true" onmousedown="turnLeft()"></i>
-	<i class="fa fa-arrow-circle-o fa-fw fa-5x" aria-hidden="true"onmousedown="stop()"></i>
-	<i class="fa fa-arrow-circle-o-right fa-fw fa-5x" aria-hidden="true" onmousedown="turnRight()"></i>
-</p>
-<p>
-	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
-	<i class="fa fa-arrow-circle-o-down fa-fw fa-5x" aria-hidden="true" onmousedown="reverse()"></i>
-	<i class="fa fa-fw fa-5x" aria-hidden="true"></i>
-</p>
+	var callBack = function(macro, args, response){}
+
+        // Create a "stop" button and call function
+        var stop = webiopi().createButton("stop", "!", function(){
+                webiopi().callMacro("stop", [], callBack);
+        });
+
+        // Create a "forward" button and call function
+        var forward = webiopi().createButton("forward", "^", function(){
+                webiopi().callMacro("forward", [], callBack);
+        });
+
+        // Create a "back" button and call function
+        var back = webiopi().createButton("back", "v", function(){
+                webiopi().callMacro("back", [], callBack);
+        });
+
+        // Create a "left" button and call function
+        var left = webiopi().createButton("left", "<", function(){
+                webiopi().callMacro("left", [], callBack);
+        });
+
+        // Create a "right" button and call function
+        var right = webiopi().createButton("right", ">", function(){
+                webiopi().callMacro("right", [], callBack);
+        });
+
+	
+ 
+        // Append button to HTML element with ID="controls" using jQuery
+        $("#controls1").append(forward);
+	$("#controls2").append(left);
+	$("#controls2").append(right);
+	$("#controls3").append(back);
+	$("#controls4").append(stop);
+
+ 
+        // Refresh GPIO buttons
+        // pass true to refresh repeatedly of false to refresh once
+                webiopi().refreshGPIO(true);
+    });
+ 
+    </script>
+ 
+<style type="text/css">
+        button {
+            display: block;
+            margin: 5px 5px 5px 5px;
+            width: 160px;
+            height: 45px;
+            font-size: 24pt;
+            font-weight: bold;
+            color: white;
+        }
+
+	#control_buttons div {
+		display: flex;
+		justify-content: center;
+	}
+ 
+        #gpio17.LOW {
+            background-color: Black;
+        }
+ 
+        #gpio17.HIGH {
+            background-color: Blue;
+        }
+    </style>
+ 
+</head>
+<body>
+
+<div id="control_buttons">
+<div id="controls1" align="center"></div>
+<div id="controls2" align="center"></div>
+<div id="controls3" align="center"></div>
+<div id="controls4" align="center"></div>
+</div> 
+
+</body>
+</html>

@@ -1,12 +1,32 @@
-import RPi.GPIO as GPIO
-import time
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(7, GPIO.OUT)
-GPIO.setup(11, GPIO.OUT)
-while True:
-	GPIO.output(7, True)
-	GPIO.output(11, False)
-	time.sleep(2)
-	GPIO.output(7, False)
-	GPIO.output(11, True)
-	time.sleep(2)
+import webiopi
+import datetime
+ 
+GPIO = webiopi.GPIO
+ 
+IN1 = 17 # GPIO pin using BCM numbering
+IN2 = 4
+
+ 
+def setup():
+	GPIO.setFunction(IN1, GPIO.OUT)
+	GPIO.setFunction(IN2, GPIO.OUT)
+
+def loop():
+	#if (GPIO.digitalRead(IN1) == GPIO.LOW):
+		#GPIO.digitalWrite(IN1, GPIO.HIGH)
+		#GPIO.digitalWrite(IN2, GPIO.LOW)
+ 
+	#if (GPIO.digitalRead(IN1) == GPIO.HIGH):
+		#GPIO.digitalWrite(IN1, GPIO.LOW)
+		#GPIO.digitalWrite(IN2, GPIO.HIGH)
+ 
+	#webiopi.sleep(1)
+
+@webiopi.macro
+def moveForward():
+	GPIO.digitalWrite(IN1, GPIO.HIGH);
+	GPIO.digitalWrite(IN2, GPIO.LOW);
+ 
+def destroy():
+	GPIO.digitalWrite(IN1, GPIO.LOW)
+	GPIO.digitalWrite(IN2, GPIO.LOW)
