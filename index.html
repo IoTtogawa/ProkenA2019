@@ -11,39 +11,62 @@
 	var callBack = function(macro, args, response){}
 
         // Create a "stop" button and call function
-        var stop = webiopi().createButton("stop", "!", function(){
-                webiopi().callMacro("stop", [], callBack);
-        });
+        /*var stop = webiopi().createButton("stop", "!", function(){
+        webiopi().callMacro("stop", [], callBack);
+        });*/
 
         // Create a "forward" button and call function
         var forward = webiopi().createButton("forward", "^", function(){
                 webiopi().callMacro("forward", [], callBack);
+        }, function(){
+                webiopi().callMacro("stop", [], callBack);
         });
 
         // Create a "back" button and call function
         var back = webiopi().createButton("back", "v", function(){
                 webiopi().callMacro("back", [], callBack);
+        }, function(){
+                webiopi().callMacro("stop", [], callBack);
         });
 
-        // Create a "left" button and call function
-        var left = webiopi().createButton("left", "<", function(){
-                webiopi().callMacro("left", [], callBack);
+        // Create a "leftTurn" button and call function
+        var leftTurn = webiopi().createButton("leftTurn", "<", function(){
+                webiopi().callMacro("leftTurn", [], callBack);
+        }, function(){
+                webiopi().callMacro("stop", [], callBack);
         });
 
-        // Create a "right" button and call function
-        var right = webiopi().createButton("right", ">", function(){
-                webiopi().callMacro("right", [], callBack);
+	// Create a "leftRoll" button and call function
+	var leftRoll = webiopi().createButton("leftRoll", "↺", function(){
+	        webiopi().callMacro("leftRoll", [], callBack);
+	}, function(){
+		webiopi().callMacro("stop", [], callBack);
+	});
+
+
+        // Create a "rightTurn" button and call function
+        var rightTurn = webiopi().createButton("rightTurn", ">", function(){
+                webiopi().callMacro("rightTurn", [], callBack);
+        }, function(){
+                webiopi().callMacro("stop", [], callBack);
         });
 
-	
- 
+	// Create a "rightRoll" button and call function
+	var rightRoll = webiopi().createButton("rightRoll", "↻", function(){
+		webiopi().callMacro("rightRoll", [], callBack);
+	}, function(){
+		webiopi().callMacro("stop", [], callBack); 
+	});
+
+
         // Append button to HTML element with ID="controls" using jQuery
         $("#controls1").append(forward);
-	$("#controls2").append(left);
-	$("#controls2").append(right);
+	$("#controls2").append(leftTurn);
+	$("#controls2").append(rightTurn);
 	$("#controls3").append(back);
-	$("#controls4").append(stop);
-
+	//$("#controls4").append(stop);
+	$("#controls4").append(leftRoll);
+	$("#controls4").append(rightRoll);
  
         // Refresh GPIO buttons
         // pass true to refresh repeatedly of false to refresh once
